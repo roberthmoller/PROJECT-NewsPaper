@@ -17,6 +17,10 @@
  */
 export type ItemType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
+export interface OpenGraph {
+    [property: string]: string;
+}
+
 export interface Item {
     id?: number;
     deleted?: boolean;
@@ -33,4 +37,6 @@ export interface Item {
     title?: string;
     parts?: number[];
     descendants?: number[];
+    metadata?: OpenGraph;
+
 }
