@@ -1,7 +1,7 @@
 import type { Item } from '$lib';
-import { parseHTML } from 'linkedom';
+import type { Fetch } from '$lib/types';
+import type { OpenGraphApi } from '$lib';
 
-type Fetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
 // todo: Search API: https://hn.algolia.com/api
 
@@ -64,54 +64,68 @@ export class HackerNewsAPI {
 		}
 	};
 
+	private readonly DEFAULT_PAGINATION = {
+		limit: 10,
+		page: 0
+	};
+
 	public constructor(
 		private readonly fetch: Fetch,
 		private readonly useCache: boolean = false,
 		private readonly useOpenGraph: boolean = false,
-		private readonly endpoint: string = 'https://hacker-news.firebaseio.com'
+		private readonly openGraph: OpenGraphApi,
+		private readonly endpoint: string = 'https://hacker-news.firebaseio.com',
 	) {
 	}
 
-	async topStories(): Promise<Item[]> {
+
+	async topStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/topstories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
-	async newStories(): Promise<Item[]> {
+
+	async newStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/newstories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
-	async bestStories(): Promise<Item[]> {
+	async bestStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/beststories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
-	async askStories(): Promise<Item[]> {
+	async askStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/askstories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
-	async showStories(): Promise<Item[]> {
+	async showStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/showstories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
-	async jobStories(): Promise<Item[]> {
+	async jobStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
 		const storiesResponse = this.useCache ? this.cache.topStories : await this.fetch(`${this.endpoint}/v0/jobstories.json`);
 		const stories: number[] = storiesResponse instanceof Response ? await storiesResponse.json() : storiesResponse;
-
-		return Promise.all(stories.map(id => this.item(id)));
+		const pageStart = limit * page;
+		const pageEnd = pageStart + limit;
+		return Promise.all(stories.slice(pageStart, pageEnd).map(id => this.item(id)));
 	}
 
 	async item(id: number): Promise<Item> {
@@ -122,7 +136,7 @@ export class HackerNewsAPI {
 		const itemData = await itemResponse.json();
 		// todo: Get OG from url body
 		if (this.useOpenGraph) {
-			itemData.metadata = await this.openGraph(itemData.url);
+			itemData.metadata = await this.openGraph.get(itemData.url);
 		}
 		return itemData;
 	}
@@ -142,19 +156,5 @@ export class HackerNewsAPI {
 		const itemResponse = await this.fetch(`${this.endpoint}/v0/item/maxitem.json`);
 		let maxItemId = await itemResponse.json();
 		return this.item(maxItemId);
-	}
-
-	async openGraph(url: string) {
-		const request = await this.fetch(url);
-		const html = request.text();
-		const { document } = parseHTML(html);
-		const metaTags = document.head.querySelector('meta');
-		const metadata = {};
-		for (const { property, content } of metaTags) {
-			if (property.startsWith('og:')) {
-				metadata[property.substring(3)] = content;
-			}
-		}
-		return metadata;
 	}
 }

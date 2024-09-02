@@ -13,9 +13,9 @@
 	<section id="new-stories" class="order-3 lg:order-1 col-span-1 sm:col-span-3 lg:col-span-1">
 		<h2 class="italic text-2xl font-serif py-2">New Stories</h2>
 		<hr>
-		<ol class="list-disc font-serif px-6 py-4">
+		<ol class="list-decimal font-serif px-6 py-4">
 			{#each newStories as story}
-				<li>
+				<li class="py-2">
 					<a href="{story.url}" class="hover:underline">
 						<article>
 							<h3>{story.title}</h3>
