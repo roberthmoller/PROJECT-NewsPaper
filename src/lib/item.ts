@@ -22,7 +22,7 @@ export interface OpenGraph {
 }
 
 export interface Item {
-    id?: number;
+    id?: number | string;
     deleted?: boolean;
     type?: ItemType;
     by?: string;
@@ -36,7 +36,14 @@ export interface Item {
     score?: number;
     title?: string;
     parts?: number[];
-    descendants?: number[];
+    descendants?: number;
     metadata?: OpenGraph;
+}
 
+export interface User {
+    about: string;
+    created: number;
+    id: string;
+    karma: number;
+    submitted: number[];
 }

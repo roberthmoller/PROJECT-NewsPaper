@@ -1,4 +1,4 @@
-import type { Item } from '$lib';
+import type { Item, User } from '$lib';
 import type { Fetch } from '$lib/types';
 import type { OpenGraphApi } from '$lib';
 
@@ -9,7 +9,12 @@ import type { OpenGraphApi } from '$lib';
  * [Documentation](https://github.com/HackerNews/API?tab=readme-ov-file)
  */
 export class HackerNewsAPI {
-	private readonly cache = {
+	private readonly cache: {
+		size: number, topStories: number[],
+		maxItem: number,
+		item: { [id: number]: Item },
+		user: { [username: string]: User }
+	} = {
 		size: 3,
 		topStories: [
 			41375548, 41371106, 41376044, 41371106, 41376044, 41371106, 41376044
@@ -74,7 +79,7 @@ export class HackerNewsAPI {
 		private readonly useCache: boolean = false,
 		private readonly useOpenGraph: boolean = false,
 		private readonly openGraph: OpenGraphApi,
-		private readonly endpoint: string = 'https://hacker-news.firebaseio.com',
+		private readonly endpoint: string = 'https://hacker-news.firebaseio.com'
 	) {
 	}
 

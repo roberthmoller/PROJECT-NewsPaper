@@ -11,33 +11,32 @@
 <main class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 p-4 gap-8">
 	<!--	-->
 	<section id="new-stories" class="order-3 lg:order-1 col-span-1 sm:col-span-3 lg:col-span-1">
-		<h2 class="italic text-2xl font-serif py-2">New Stories</h2>
+		<h2 class="italic text-2xl font-playfair font-semibold py-2">New Stories</h2>
 		<hr>
-		<ol class="list-decimal font-serif px-6 py-4">
-			{#each newStories as story}
-				<li class="py-2">
-					<a href="{story.url}" class="hover:underline">
-						<article>
-							<h3>{story.title}</h3>
-						</article>
-					</a>
-				</li>
-			{/each}
-		</ol>
+		<small>
+			<ol class="list-disc  font-serif px-6 py-4 gap-2 flex flex-col">
+				{#each newStories as story}
+					<li>
+						<a href="{story.url}" class="hover:underline">
+							<article>{story.title}</article>
+						</a>
+					</li>
+				{/each}
+			</ol>
+		</small>
 		<a href="/new" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>
 	<!--	-->
 	<section id="top-stories" class="order-1 lg:order-2 -col-span-1 sm:col-span-2 lg:col-span-3">
-		<h2 class="italic text-2xl font-serif py-2">Top Stories</h2>
+		<h2 class="italic text-2xl font-playfair font-semibold py-2">Top Stories</h2>
 		<hr>
-		<ul>
+		<ul class="py-4">
 			{#each topStories as story}
-				<li class="py-4">
+				<li>
 					<StoryListItem {story} />
 				</li>
-				<hr>
 			{/each}
 		</ul>
 		<a href="/top" class="hover:underline">
@@ -46,16 +45,14 @@
 	</section>
 	<!--	-->
 	<section id="best-stories" class="col-span-1 lg:col-span-2 order-2 lg:order-3">
-		<h2 class="italic text-2xl font-serif py-2">Best Stories</h2>
+		<h2 class="italic text-2xl font-playfair font-semibold py-2">Best Stories</h2>
 		<hr>
 		<!--todo: Carousel of between best, jobs, show -->
-		<ol class="font-serif">
+		<ol class="font-serif py-4">
 			{#each bestStories as story, index}
-				<li class="py-4">
+				<li>
 					<StoryListItem {story} rank={index + 1} brief />
 				</li>
-				<hr>
-
 			{/each}
 		</ol>
 		<a href="/best" class="hover:underline">

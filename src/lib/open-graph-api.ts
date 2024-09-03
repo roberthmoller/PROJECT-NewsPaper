@@ -10,9 +10,10 @@ export class OpenGraphApi {
 	}
 
 	async get(url: string) {
-		const metadata = {};
+		const metadata: { [key: string]: string } = {};
 		if (url == undefined) return metadata;
 		const request = await this.fetch(url);
+		if (!request.ok) return metadata;
 		const html = await request.text();
 		const { document } = parseHTML(html);
 		const metaTags = document.head.querySelectorAll('meta[property^="og:"]');
@@ -20,7 +21,7 @@ export class OpenGraphApi {
 			const property = item.getAttribute('property');
 			const content = item.getAttribute('content');
 
-			if (property?.startsWith('og:') && this.filter(property, content)) {
+			if (property?.startsWith('og:') && content != null && this.filter(property, content)) {
 				metadata[property.substring(3)] = this.transform(property, content, url);
 			}
 		}
