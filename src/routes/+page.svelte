@@ -14,7 +14,7 @@
 		<h2 class="italic text-2xl font-playfair font-semibold py-2">New Stories</h2>
 		<hr>
 		<small>
-			<ol class="list-disc  font-serif px-6 py-4 gap-2 flex flex-col">
+			<ul class="list-disc font-serif px-6 py-4 gap-2 flex flex-col">
 				{#each newStories as story}
 					<li>
 						<a href="{story.url}" class="hover:underline">
@@ -22,7 +22,7 @@
 						</a>
 					</li>
 				{/each}
-			</ol>
+			</ul>
 		</small>
 		<a href="/new" class="hover:underline">
 			<sub>MORE STORIES</sub>
@@ -39,7 +39,7 @@
 				</li>
 			{/each}
 		</ul>
-		<a href="/top" class="hover:underline">
+		<a href="/stories/top" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>
@@ -48,14 +48,14 @@
 		<h2 class="italic text-2xl font-playfair font-semibold py-2">Best Stories</h2>
 		<hr>
 		<!--todo: Carousel of between best, jobs, show -->
-		<ol class="font-serif py-4">
+		<ol>
 			{#each bestStories as story, index}
 				<li>
 					<StoryListItem {story} rank={index + 1} brief />
 				</li>
 			{/each}
 		</ol>
-		<a href="/best" class="hover:underline">
+		<a href="/stories/best" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>
