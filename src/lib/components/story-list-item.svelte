@@ -47,10 +47,15 @@
 					{#if story.metadata.description.length > 200}...{/if}
 				</p>
 			{/if}
-
-			<a href="{story.url}" class="hover:underline flex-grow flex flex-col justify-end py-4">
-				<sup><b>READ MORE <span class="text-black/50">({new URL(story.url).host})</span></b></sup>
-			</a>
+			{#if story.url}
+				<a href="{story.url}" class="hover:underline flex-grow flex flex-col justify-end py-4">
+					<sup><b>READ MORE <span class="text-black/50">({new URL(story.url).host})</span></b></sup>
+				</a>
+				{:else}
+				<a href="/item/{story.id}" class="hover:underline flex-grow flex flex-col justify-end py-4">
+					<sup><b>READ MORE</b></sup>
+				</a>
+			{/if}
 		{/if}
 	</div>
 </article>
