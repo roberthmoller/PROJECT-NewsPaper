@@ -19,7 +19,7 @@ import type { Metadata } from "./open-graph";
  */
 export type ItemType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
-export type Item = Title & Subtitle & ReadMore & {
+export type Item = {
     id?: number | string;
     deleted?: boolean;
     type?: ItemType;
@@ -44,23 +44,4 @@ export interface User {
     id: string;
     karma: number;
     submitted: number[];
-}
-
-export type Subtitle =  {
-    id?: number;
-    type?: ItemType;
-    by?: string;
-    time?: number;
-    score?: number;
-    descendants?: number;
-}
-
-export type Title = {
-    title?: string;
-    url?: string;
-}
-
-export type ReadMore = {
-    url?: string;
-    id?: number;
 }

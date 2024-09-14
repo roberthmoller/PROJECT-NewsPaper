@@ -1,14 +1,17 @@
 <script lang="ts">
-	import type { External, Image } from '$lib/types';
-	export const { image, alt, isBrief, style, isLoaded }: External<Image> & { isBrief: boolean, style: 'row' | 'col' } = $props();
+	import type { External, Metadata } from '$lib/types';
+	type Props = External<Pick<Metadata, 'image' | 'alt'>> & { style: 'row' | 'col' } & any;
+	export const { image, alt, style, isLoading, ...others }: Props = $props();
 </script>
 
-{#if !isLoaded}
-	Loading...
-{:else if image && !isBrief}
-	<img
-		src={image}
-		alt={alt ?? ''}
-		class="max-h-[20em] {style === 'row' ? 'order-2 w-64' : 'w-full'} object-cover"
-        />
+{#if image}
+	<div {...others}>
+		<img
+			src={image}
+			alt={alt}
+			class="max-h-[20em] {style === 'row' ? 'order-2 w-64' : 'w-full'} object-cover"
+		/>
+	</div>
+{:else if isLoading}
+	<p {...others}>Loading...</p>
 {/if}

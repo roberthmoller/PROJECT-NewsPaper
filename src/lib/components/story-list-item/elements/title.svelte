@@ -1,11 +1,16 @@
 <script lang="ts">
-	import type { Title } from '$lib/types';
+	import type { Item, External } from '$lib/types';
 
-	const { title, url, ...others}: Title & any = $props();
+	type Props = External<Pick<Item, 'title' | 'url'>> & any;
+	const { title, url, isLoading, ...others }: Props = $props();
 </script>
 
-<div {...others}>
-	<a href={url} class="hover:underline">
-		<h3 class="text-xl font-serif font-bold">{title}</h3>
-	</a>
-</div>
+{#if title}
+	<div {...others}>
+		<a href={url} class="hover:underline">
+			<h3 class="text-xl font-serif font-bold">{title}</h3>
+		</a>
+	</div>
+{:else if isLoading}
+	<p {...others}>Loading...</p>
+{/if}

@@ -14,14 +14,14 @@
         score: 24,
         descendants: 140,
         id: 1,
-        isLoaded: true,
+        isLoading: true,
     }}
 
     metadata={{
         image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
         description: 'This is a test description',
         alt: 'This is a test alt',
-        isLoaded: true,
+        isLoading: true,
     }}
 
     rank={1}

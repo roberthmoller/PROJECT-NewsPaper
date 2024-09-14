@@ -11,17 +11,16 @@
 		style?: 'full' | 'list' | 'brief' | 'bullet';
 	};
 	const { storyId, style = 'full' }: Props = $props();
-	let story: External<Item> = $state({ isLoaded: false });
-	let metadata: External<Metadata> = $state({ isLoaded: false });
+	let story: External<Item> = $state({ isLoading: true });
+	let metadata: External<Metadata> = $state({ isLoading: true });
 
 	onMount(async () => {
-		story = { ...(await hackerNews.item(storyId)), isLoaded: true };
+		story = await hackerNews.item(storyId);
 
 		if (['full', 'list'].includes(style) && story.url) {
-			metadata = { ...(await openGraph.get(story.url)), isLoaded: true };
-			console.log('got metadata', metadata);
+			metadata = await openGraph.get(story.url);
 		} else {
-			metadata = { isLoaded: true };
+			metadata = { isLoading: false };
 		}
 	});
 </script>

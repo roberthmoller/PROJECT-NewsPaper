@@ -1,16 +1,19 @@
 <script lang="ts">
-	import type { Item, Title, External } from '$lib/types';
-
-	export const { story, ...others }: { story: External<Item> } = $props();
-	const { title, url, isLoaded } = story;
+	import type { Item, External } from '$lib/types';
+	type Props = { story: External<Pick<Item, 'title' | 'url'>> } & any;
+	export const { story, ...others }: Props = $props();
 </script>
 
-<div {...others}>
-	{#if !isLoaded && !title}
-		<p>Loading...</p>
-	{:else}
-		<a href={url} class="hover:underline">
-			<article>{title}</article>
-		</a>
-	{/if}
-</div>
+{#if story.title && story.url}
+	<div {...others}>
+		<article>
+			<p>
+				<a href={story.url} class="hover:underline">
+					{story.title}
+				</a>
+			</p>
+		</article>
+	</div>
+{:else if story.isLoading}
+	<p {...others}>Loading...</p>
+{/if}

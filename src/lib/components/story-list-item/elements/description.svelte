@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Description, External } from '$lib/types';
-
-	export const { description, isLoaded, ...others }: External<Description> & any = $props();
+	import type { External, Metadata } from '$lib/types';
+	type Props = External<Pick<Metadata, 'description'>> & any;
+	export const { description, isLoading, ...others }: Props = $props();
 </script>
 
 {#if description}
@@ -11,6 +11,6 @@
 			{#if description && description?.length > 200}...{/if}
 		</p>
 	</div>
-{:else if !isLoaded}
+{:else if isLoading}
 	<div {...others}>Loading...</div>
 {/if}
