@@ -1,3 +1,5 @@
+import type { Metadata } from "./open-graph";
+
 /*
  *   id	            The item's unique id.
  *   deleted	    true if the item is deleted.
@@ -17,11 +19,7 @@
  */
 export type ItemType = 'job' | 'story' | 'comment' | 'poll' | 'pollopt';
 
-export interface OpenGraph {
-    [property: string]: string;
-}
-
-export interface Item {
+export type Item = {
     id?: number | string;
     deleted?: boolean;
     type?: ItemType;
@@ -37,7 +35,6 @@ export interface Item {
     title?: string;
     parts?: number[];
     descendants?: number;
-    metadata?: OpenGraph;
 }
 
 export interface User {
@@ -46,4 +43,18 @@ export interface User {
     id: string;
     karma: number;
     submitted: number[];
+}
+
+export type Comment =  {
+    id: number;
+    by: string;
+    text: string;
+    time: number;
+    kids: number[];
+    parent: number;
+};
+
+export type CommentTree = {
+    comment: Comment;
+    kids: CommentTree[];
 }

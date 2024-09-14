@@ -1,4 +1,4 @@
-import { HackerNewsAPI, type Item, OpenGraphApi } from '$lib';
+import { HackerNewsApi, type Item, OpenGraphApi } from '$lib';
 import { error, redirect } from '@sveltejs/kit';
 import type { RouteParams } from './$types';
 import { goto } from '$app/navigation';
@@ -7,27 +7,26 @@ const PAGE_SIZE = { MIN: 1, MAX: 100 };
 const DEFAULT_LIMIT = 10;
 
 export const load = async ({ fetch, url, params }) => {
-	const ogAPI = new OpenGraphApi(fetch);
-	const newsAPI = new HackerNewsAPI(fetch, false, true, ogAPI);
-
+	const newsApi = new HackerNewsApi(fetch);
 	const { page, limit, category } = parseStoriesParams({ url, params });
 
-
 	console.log('category', category, 'page', page + 1);
-	const categories: { [key: string]: Promise<Item[]> } = {
-		'top': newsAPI.topStories({ page, limit }),
-		'new': newsAPI.newStories({ page, limit }),
-		'best': newsAPI.bestStories({ page, limit })
-	};
-
-	if (!Object.keys(categories).includes(category)) {
-		error(400, { message: 'No such category was found. Available categories are' });
+	switch (category) {
+		case 'top':
+			return { stories: await newsApi.topStories({ page, limit }), category };
+		case 'new':
+			return { stories: await newsApi.newStories({ page, limit }), category };
+		case 'best':
+			return { stories: await newsApi.bestStories({ page, limit }), category };
+		case 'ask':
+			return { stories: await newsApi.askStories({ page, limit }), category };
+		case 'show':
+			return { stories: await newsApi.showStories({ page, limit }), category };
+		case 'jobs':
+			return { stories: await newsApi.jobStories({ page, limit }), category };
+		default:
+			error(400, { message: 'No such category was found. Available categories are' });
 	}
-
-	return {
-		stories: await categories[category],
-		category
-	};
 };
 
 function parseStoriesParams(request: { url: URL, params: RouteParams }) {

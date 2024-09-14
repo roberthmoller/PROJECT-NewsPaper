@@ -10,6 +10,7 @@
 - [ ] Fix stories breadcrumbs HOME/BEST
 - [ ] Fix image sizing in stories + padding
 - [x] Fix storied title uppercase
+- [ ] on mobile, stories should be vertical
 
 
 ## User experience

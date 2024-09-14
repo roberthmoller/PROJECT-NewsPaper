@@ -1,7 +1,7 @@
 <!-- Inspo: https://preview.themeforest.net/item/the-newspaper-news-magazine-editorial-wordpress-theme/full_screen_preview/20706986?_ga=2.260276040.47790824.1724824750-1272869346.1724824750-->
 <script>
 	import Time from 'svelte-time';
-	import StoryListItem from '$lib/components/story-list-item.svelte';
+	import StoryListItem from '$lib/components/story-list-item/story-list-item.svelte';
 
 	const { data } = $props();
 	const { topStories, bestStories, newStories } = data;
@@ -15,11 +15,9 @@
 		<hr>
 		<small>
 			<ul class="list-disc font-serif px-6 py-4 gap-2 flex flex-col">
-				{#each newStories as story}
+				{#each newStories as storyId}
 					<li>
-						<a href="{story.url}" class="hover:underline">
-							<article>{story.title}</article>
-						</a>
+						<StoryListItem {storyId} style="bullet"/>
 					</li>
 				{/each}
 			</ul>
@@ -33,13 +31,14 @@
 		<h2 class="italic text-2xl font-playfair font-semibold py-2">Top Stories</h2>
 		<hr>
 		<ul class="py-4">
-			{#each topStories as story}
+			{#each topStories as storyId}
 				<li>
-					<StoryListItem {story} />
+					<StoryListItem {storyId} style='full'/>
 				</li>
+				<li><hr></li>
 			{/each}
 		</ul>
-		<a href="/stories/top" class="hover:underline">
+		<a href="/top?page=2" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>
@@ -49,13 +48,13 @@
 		<hr>
 		<!--todo: Carousel of between best, jobs, show -->
 		<ol>
-			{#each bestStories as story, index}
+			{#each bestStories as storyId, index}
 				<li>
-					<StoryListItem {story} rank={index + 1} brief />
+					<StoryListItem {storyId} rank={index + 1} style='brief' />
 				</li>
 			{/each}
 		</ol>
-		<a href="/stories/best" class="hover:underline">
+		<a href="/best?page=2" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>

@@ -1,10 +1,10 @@
-import { HackerNewsAPI, OpenGraphApi } from '$lib';
+import { HackerNewsApi, OpenGraphApi } from '$lib';
 
 export const load = async ({ fetch, params: { itemId } }) => {
-	const ogAPI = new OpenGraphApi(fetch);
-	const newsAPI = new HackerNewsAPI(fetch ,true, false, ogAPI);
+	const newsApi = new HackerNewsApi(fetch);
+	const openGraphApi = new OpenGraphApi(fetch, { shouldProxy: false });
 
-	return {
-		item: await newsAPI.item(itemId)
-	};
+	const story = await newsApi.item(parseInt(itemId))
+	const metadata = await openGraphApi.get(story.url);
+	return { story, metadata };
 };
