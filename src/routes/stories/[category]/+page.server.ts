@@ -7,8 +7,7 @@ const PAGE_SIZE = { MIN: 1, MAX: 100 };
 const DEFAULT_LIMIT = 10;
 
 export const load = async ({ fetch, url, params }) => {
-	const ogAPI = new OpenGraphApi(fetch);
-	const newsAPI = new HackerNewsAPI(fetch, false, true, ogAPI);
+	const newsAPI = new HackerNewsAPI(fetch);
 
 	const { page, limit, category } = parseStoriesParams({ url, params });
 

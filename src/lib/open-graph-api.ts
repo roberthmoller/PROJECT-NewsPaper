@@ -12,7 +12,7 @@ export class OpenGraphApi {
 	async get(url: string) {
 		const metadata: { [key: string]: string } = {};
 		if (url == undefined) return metadata;
-		const request = await this.fetch(url);
+		const request = await this.fetch("/proxy?url="+url);
 		if (!request.ok) return metadata;
 		const html = await request.text();
 		const { document } = parseHTML(html);

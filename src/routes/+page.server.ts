@@ -1,13 +1,11 @@
-import { HackerNewsAPI, OpenGraphApi } from '$lib';
+import { HackerNewsAPI } from '$lib/hacker-news-api';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ fetch, setHeaders }) => {
-	const ogAPI = new OpenGraphApi(fetch);
-	const newsAPI = new HackerNewsAPI(fetch, false, true, ogAPI);
+export const load: PageServerLoad = async ({ fetch }) => {
+	const api = new HackerNewsAPI(fetch);
 	return {
-		topStories: await newsAPI.topStories(),
-		bestStories: await newsAPI.bestStories(),
-		newStories: await newsAPI.newStories(),
-		// bestStories: [],
-		// newStories: [],
+		topStories: await api.topStories(),
+		bestStories: await api.bestStories(),
+		newStories: await api.newStories(),
 	};
 };

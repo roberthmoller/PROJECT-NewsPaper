@@ -77,11 +77,8 @@ export class HackerNewsAPI {
 	public constructor(
 		private readonly fetch: Fetch,
 		private readonly useCache: boolean = false,
-		private readonly useOpenGraph: boolean = false,
-		private readonly openGraph: OpenGraphApi,
 		private readonly endpoint: string = 'https://hacker-news.firebaseio.com'
-	) {
-	}
+	) {}
 
 
 	async topStories({ limit, page } = this.DEFAULT_PAGINATION): Promise<Item[]> {
@@ -138,12 +135,7 @@ export class HackerNewsAPI {
 			return this.cache.item[id as keyof typeof this.cache.item] as unknown as Item;
 		}
 		const itemResponse = await this.fetch(`${this.endpoint}/v0/item/${id}.json`);
-		const itemData = await itemResponse.json();
-		// todo: Get OG from url body
-		if (this.useOpenGraph) {
-			itemData.metadata = await this.openGraph.get(itemData.url);
-		}
-		return itemData;
+		return await itemResponse.json();
 	}
 
 	async user(username: string): Promise<Item> {

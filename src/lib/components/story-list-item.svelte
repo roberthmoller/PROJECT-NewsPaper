@@ -1,15 +1,31 @@
 <script lang="ts">
 	import Time from 'svelte-time';
 	import type { Item } from '$lib';
+	import { OpenGraphApi } from '$lib/open-graph-api';
+	import { onMount } from 'svelt
+	import { enhance } from '$app/forms';
+
+	const openGraph = new OpenGraphApi(fetch);
 
 	type Props = { story: Item, rank?: number, brief?: boolean, isRow?: boolean };
 	const { story, rank, brief = false, isRow = false, ...other }: Props = $props();
+	let metadata: { [p: string]: string } = $state(undefined);
+	let isMetadataLoading = $state(false);
+
+	onMount(async () => {
+		if (story.url) {
+			metadata = await openGraph.get(story.url);
+			console.log('got metadata', metadata);
+		}
+		isMetadataLoading = false;
+	});
 </script>
 
 <article class="flex flex-{isRow ? 'row' : 'col'} items-stretch border-b inset-0">
-
-	{#if story.metadata?.image && !brief}
-		<img src="{story.metadata.image}" alt="{story.metadata['image:alt'] ?? ''}"
+	{#if isMetadataLoading}
+		Loading...
+	{:else if metadata?.image && !brief}
+		<img src="{metadata.image}" alt="{metadata['image:alt'] ?? ''}"
 				 class="max-h-[20em] {isRow ? 'order-2 w-64' : 'w-full'} object-cover" />
 	{/if}
 
@@ -28,9 +44,12 @@
 				<span>by <a href="/user/{story.by}" class="hover:underline">{story.by}</a></span><span>|</span>
 			{/if}
 			{#if story.score}
-				<span>⬆ {story.score}</span><span>|</span>
+				<!--todo: Add button to upvote -->
+				<form method="POST" action="/item/{story.id}/upvote" use:enhance>
+					<button>⬆</button>
+				</form>
+				<span>{story.score}</span><span>|</span>
 			{/if}
-			<!--todo: Add button to upvote -->
 			{#if story.descendants}
 				<span><a href="/item/{story.id}" class="hover:underline ">💬 {story.descendants}</a></span>
 			{/if}
@@ -41,17 +60,19 @@
 		</a>
 
 		{#if !brief}
-			{#if story.metadata?.description}
+			{#if isMetadataLoading}
+				Loading...
+			{:else if metadata?.description}
 				<p class="font-serif text-black/60 mb-1">
-					{story.metadata?.description?.slice(0, 200)}
-					{#if story.metadata.description.length > 200}...{/if}
+					{metadata?.description?.slice(0, 200)}
+					{#if metadata.description.length > 200}...{/if}
 				</p>
 			{/if}
 			{#if story.url}
 				<a href="{story.url}" class="hover:underline flex-grow flex flex-col justify-end py-4">
 					<sup><b>READ MORE <span class="text-black/50">({new URL(story.url).host})</span></b></sup>
 				</a>
-				{:else}
+			{:else}
 				<a href="/item/{story.id}" class="hover:underline flex-grow flex flex-col justify-end py-4">
 					<sup><b>READ MORE</b></sup>
 				</a>
