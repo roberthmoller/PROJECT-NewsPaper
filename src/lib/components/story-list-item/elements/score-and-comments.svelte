@@ -1,19 +1,15 @@
 <script lang="ts">
-	import type { External, Subtitle } from '$lib/types';
+	import type { External, Item } from '$lib/types';
 
-	type Props = External<Pick<Subtitle, 'id' | 'score' | 'descendants'>> & any;
+	type Props = External<Pick<Item, 'id' | 'score' | 'descendants'>> & any;
 	const { id, score, descendants, isLoading, ...others }: Props = $props();
 </script>
 
 {#if score && descendants}
-	<div {...others}>
-		<p class="text-right">
-			<span class="mr-2">👍 {score}</span>
-			<span>💭 <a href="/item/{id}" class="hover:underline">{descendants}</a></span>
-		</p>
-	</div>
+	<p {...others}>
+		<a class="mr-2" href="https://news.ycombinator.com/item?id={id}">👍 {score}</a>
+		<a href="/item/{id}" class="hover:underline">💭 {descendants}</a>
+	</p>
 {:else if isLoading}
-	<div {...others}>
-		<p>Loading...</p>
-	</div>
+	<p {...others}>Loading...</p>
 {/if}
