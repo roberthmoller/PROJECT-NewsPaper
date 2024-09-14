@@ -22,7 +22,7 @@ export const load = async ({ fetch, url, params }) => {
 			return { stories: await newsApi.askStories({ page, limit }), category };
 		case 'show':
 			return { stories: await newsApi.showStories({ page, limit }), category };
-		case 'job':
+		case 'jobs':
 			return { stories: await newsApi.jobStories({ page, limit }), category };
 		default:
 			error(400, { message: 'No such category was found. Available categories are' });
