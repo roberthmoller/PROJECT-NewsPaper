@@ -20,8 +20,8 @@
 				<p>upvote</p>
 			</div> -->
 
+			<hr class="mt-2" />
 			{#if kids && kids.length > 0}
-				<hr class="mt-2" />
 				<div class="replies pl-8 mt-4">
 					<CommentsList {kids} />
 				</div>

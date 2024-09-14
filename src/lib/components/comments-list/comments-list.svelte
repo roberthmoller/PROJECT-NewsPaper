@@ -2,13 +2,12 @@
 	import type { External, Item } from '$lib/types';
 	import { CommentItem } from './comment-item';
 
-	type Props = External<Pick<Item, 'kids'>> & any;
+	type Props = {kids: number[]} & any;
 	const { kids, ...other }: Props = $props();
 </script>
 
 <div {...other}>
-	{#each (kids ?? []).slice(0, 2) as commentId}
+	{#each (kids ?? []).sort((a: number, b: number) => b - a) as commentId}
 		<CommentItem {commentId} class="mb-4"/>
-		<hr/>
 	{/each}
 </div>
