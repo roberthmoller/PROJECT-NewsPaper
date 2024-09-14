@@ -7,8 +7,8 @@
 
 {#if score && descendants}
 	<p {...others}>
-		<a class="mr-2" href="https://news.ycombinator.com/item?id={id}">👍 {score}</a>
-		<a href="/item/{id}" class="hover:underline">💭 {descendants}</a>
+		<a class="text-xs mr-2" href="https://news.ycombinator.com/item?id={id}">👍 {score}</a>
+		<a href="/item/{id}" class="text-xs hover:underline">💭 {descendants}</a>
 	</p>
 {:else if isLoading}
 	<p {...others}>Loading...</p>

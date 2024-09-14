@@ -10,16 +10,15 @@ export class OpenGraphApi {
 	) {
 	}
 
-	async get(url: string): Promise<Metadata> {
+	async get(url?: string): Promise<Metadata> {
+		const metadata: { [key: string]: string } = {};
+		if (url == undefined) return metadata;
 		if (this.options.shouldProxy) {
 			const response = await this.fetch('/api/open-graph?url=' + url)
 			return await response.json() as Promise<Metadata>;
 		}
-
-		const metadata: { [key: string]: string } = {};
-		if (url == undefined) return metadata;
 		try {
-			const request = await this.fetch("/proxy?url=" + url);
+			const request = await this.fetch(url);
 			if (!request.ok) return metadata;
 			const html = await request.text();
 			const { document } = parseHTML(html);

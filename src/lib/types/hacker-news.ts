@@ -45,3 +45,17 @@ export interface User {
     karma: number;
     submitted: number[];
 }
+
+export type Comment =  {
+    id: number;
+    by: string;
+    text: string;
+    time: number;
+    kids: number[];
+    parent: number;
+};
+
+export type CommentTree = {
+    comment: Comment;
+    kids: CommentTree[];
+}

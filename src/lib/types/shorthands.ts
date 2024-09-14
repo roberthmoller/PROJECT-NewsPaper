@@ -4,4 +4,5 @@ export type Fetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Re
 export type Loading = {
     isLoading: boolean
 };
+
 export type External<T> = T | Loading;
