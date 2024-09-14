@@ -35,7 +35,6 @@ export type Item = {
     title?: string;
     parts?: number[];
     descendants?: number;
-    metadata?: Metadata;
 }
 
 export interface User {

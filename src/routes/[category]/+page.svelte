@@ -29,6 +29,7 @@
 <main class="flex flex-col m-4 gap-4">
 	{#each stories as storyId}
 		<StoryListItem {storyId} style="list" />
+		<hr />
 	{/each}
 
 	<nav class="grid-cols-4 mx-auto my-2">

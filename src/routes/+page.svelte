@@ -38,7 +38,7 @@
 				<li><hr></li>
 			{/each}
 		</ul>
-		<a href="/stories/top?page=2" class="hover:underline">
+		<a href="/top?page=2" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>
@@ -54,7 +54,7 @@
 				</li>
 			{/each}
 		</ol>
-		<a href="/stories/best?page=2" class="hover:underline">
+		<a href="/best?page=2" class="hover:underline">
 			<sub>MORE STORIES</sub>
 		</a>
 	</section>

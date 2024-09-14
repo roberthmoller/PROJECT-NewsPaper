@@ -138,9 +138,9 @@ export class HackerNewsApi {
 		return await itemResponse.json();
 	}
 
-	async user(username: string): Promise<Item> {
+	async user(username: string): Promise<User> {
 		if (this.useCache) {
-			return this.cache.user[username as keyof typeof this.cache.user] as unknown as Item;
+			return this.cache.user[username as keyof typeof this.cache.user] as unknown as User;
 		}
 		const itemResponse = await this.fetch(`${this.endpoint}/v0/user/${username}.json`);
 		return await itemResponse.json();

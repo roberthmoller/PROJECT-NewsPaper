@@ -6,7 +6,7 @@
 
 {#if description}
 	<div {...others}>
-		<p class="font-serif">
+		<p class="font-serif overflow-ellipsis">
 			{#if isTruncated}
 				{description?.slice(0, 200)}
 				{#if description && description?.length > 200}...{/if}

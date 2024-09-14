@@ -11,6 +11,7 @@
 	<StoryListElements.Title {...story} class="mb-1"/>
 	<StoryListElements.TimeAndUser {...story} class="mb-3"/>
 	<StoryListElements.Description {...metadata} class="mb-3"/>
+	<StoryListElements.ReadMore {...story} />
 	{#if story.text}
 		<p>{@html story.text}</p>
 	{/if}
