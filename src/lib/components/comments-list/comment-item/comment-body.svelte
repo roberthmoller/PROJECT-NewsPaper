@@ -3,10 +3,11 @@
 	import CommentsList from '../comments-list.svelte';
 	import { StoryListElements } from '$lib/components';
 	import Shimmer from '$lib/components/shimmer/shimmer.svelte';
-	type Props = External<Pick<Item, 'text' | 'title' | 'by' | 'time' | 'kids' | 'url' | 'id'>> & any;
-	const { text, title, by, time, url, id, kids, isLoading, ...other }: Props = $props();
+	type Props = External<Pick<Item, 'text' | 'title' | 'by' | 'time' | 'kids' | 'url' | 'id' | 'dead'>> & any;
+	const { text, title, by, time, url, id, kids, dead, isLoading, ...other }: Props = $props();
 </script>
 
+{#if !dead}
 <div {...other}>
 	<div class="comment mb-1">
 		<StoryListElements.Title {title} {url} {id} {isLoading} class="mb-1" />
@@ -31,5 +32,6 @@
 				<CommentsList {kids} />
 			</div>
 		{/if}
+		</div>
 	</div>
-</div>
+{/if}

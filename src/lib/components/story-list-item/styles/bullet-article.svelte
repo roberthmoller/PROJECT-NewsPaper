@@ -9,7 +9,7 @@
 	<div {...others}>
 		<article>
 			<p>
-				<a href={story.url} class="hover:underline">
+				<a href={story.url} target="_blank" class="hover:underline">
 					{story.title}
 				</a>
 			</p>

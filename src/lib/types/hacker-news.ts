@@ -52,6 +52,7 @@ export type Comment =  {
     time: number;
     kids: number[];
     parent: number;
+    deleted?: boolean;
 };
 
 export type CommentTree = {

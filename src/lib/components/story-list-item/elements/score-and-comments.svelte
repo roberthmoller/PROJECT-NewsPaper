@@ -7,13 +7,19 @@
 </script>
 
 {#if score && descendants}
-	<p {...others}>
-		<a class="text-xs mr-2" href="https://news.ycombinator.com/item?id={id}">👍 {score}</a>
-		<a href="/item/{id}" class="text-xs hover:underline">💭 {descendants}</a>
-	</p>
+	<div {...others}>
+		<p class="text-xs flex flex-row gap-2 whitespace-nowrap flex-nowrap">
+			<a href="https://news.ycombinator.com/item?id={id}" class="hover:underlinewhitespace-nowrap">
+				👍 {score}
+			</a>
+			<a href="/item/{id}" class="hover:underline whitespace-nowrap inline-block">
+				💭 {descendants}
+			</a>
+		</p>
+	</div>
 {:else if isLoading}
 	<div {...others}>
-		<p class="flex flex-row gap-2">
+		<p class="flex flex-row gap-2 text-xs">
 			<Shimmer>👍 100</Shimmer>
 			<Shimmer>💭 100</Shimmer>
 		</p>

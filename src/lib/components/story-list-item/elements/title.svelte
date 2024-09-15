@@ -8,7 +8,7 @@
 
 {#if title}
 	<div {...others}>
-		<a href={url ?? `/item/${id}`} class="hover:underline">
+		<a href={url ?? `/item/${id}`} target="_blank" class="hover:underline">
 			<h3 class="text-xl font-serif font-bold">{@html title}</h3>
 		</a>
 	</div>
