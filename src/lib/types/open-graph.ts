@@ -1,4 +1,6 @@
-export type Metadata =  Image & Description ;
+export type Metadata =  Image & Description & {
+    title?: string;
+};
 // & {
 //     [property: string]: string;
 // }

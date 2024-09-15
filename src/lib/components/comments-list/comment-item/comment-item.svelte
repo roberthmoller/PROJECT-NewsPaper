@@ -13,6 +13,8 @@
 	});
 </script>
 
-<div {...other}>
-	<CommentBody {...comment} />
-</div>
+{#if !comment.deleted}
+	<div {...other}>
+		<CommentBody {...comment} />
+	</div>
+{/if}

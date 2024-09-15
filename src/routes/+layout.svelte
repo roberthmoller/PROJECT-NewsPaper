@@ -34,5 +34,5 @@
 </div>
 
 <footer class="max-w-5xl mx-auto">
-	<p class="py-4 text-xs text-black/30">© Robert H. Moller 2024</p>
+	<p class="py-4 text-xs text-black/30"></p>
 </footer>

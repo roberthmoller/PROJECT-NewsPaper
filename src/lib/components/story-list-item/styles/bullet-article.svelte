@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Shimmer } from '$lib/components';
 	import type { Item, External } from '$lib/types';
 	type Props = { story: External<Pick<Item, 'title' | 'url'>> } & any;
 	export const { story, ...others }: Props = $props();
@@ -8,12 +9,15 @@
 	<div {...others}>
 		<article>
 			<p>
-				<a href={story.url} class="hover:underline">
+				<a href={story.url} target="_blank" class="hover:underline">
 					{story.title}
 				</a>
 			</p>
 		</article>
 	</div>
 {:else if story.isLoading}
-	<p {...others}>Loading...</p>
+	<Shimmer {...others}>
+		<p>The bullet articles</p>
+		<p>are usually two lines</p>
+	</Shimmer>
 {/if}
