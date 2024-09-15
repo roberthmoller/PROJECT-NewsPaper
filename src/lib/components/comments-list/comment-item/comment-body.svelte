@@ -14,7 +14,7 @@
 		<StoryListElements.TimeAndUser {by} {time} {isLoading} class="mb-3" />
 
 		{#if text}
-			<p>{@html text}</p>
+			<p class="prose">{@html text}</p>
 		{:else if isLoading}
 			<Shimmer>
 				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, quisquam.</p>
