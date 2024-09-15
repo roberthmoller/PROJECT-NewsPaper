@@ -18,7 +18,7 @@
 
 	{#if metadata.description}
 		<blockquote class="mb-3 bg-black/5 p-4 rounded-md grid grid-cols-12 gap-4">
-			<div class="col-span-8 flex flex-col gap-1">
+			<div class="{metadata.image ? 'col-span-8' : 'col-span-12' } flex flex-col gap-1">
 				{#if metadata.title}
 					<p class="text-sm text-black/50"><a href={story.url} target="_blank" class="hover:underline" title={story.url}>{metadata.title}</a></p>
 				{/if}
@@ -27,12 +27,14 @@
 					<summary class="text-xs text-black/50 cursor-pointer hover:underline">View raw metadata</summary>
 					<pre class="mt-1 text-xs bg-black/10 p-2 rounded-md overflow-x-auto">{JSON.stringify(metadata, null, 2)}</pre>
 				</details>
-				<sub class="text-xs mt-auto whitespace-nowrap overflow-hidden text-ellipsis block">
+				<sub class="text-xs mt-auto whitespace-nowrap overflow-hidden text-ellipsis block font-bold">
 					<span class="text-black/50">OpenGraph data from</span> 
 					<a href={story.url} target="_blank" class="hover:underline" title={story.url}>{story.url}</a>
 				</sub>
 			</div>
-			<StoryListElements.Image {...metadata} class="col-span-4" />
+			{#if metadata.image}
+				<StoryListElements.Image {...metadata} class="col-span-4" />
+			{/if}
 		</blockquote>
 	{/if}
 
