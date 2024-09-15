@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Shimmer } from '$lib/components';
 	import type { External, Item } from '$lib/types';
 
 	type Props = External<Pick<Item, 'id' | 'score' | 'descendants'>> & any;
@@ -11,5 +12,10 @@
 		<a href="/item/{id}" class="text-xs hover:underline">💭 {descendants}</a>
 	</p>
 {:else if isLoading}
-	<p {...others}>Loading...</p>
+	<div {...others}>
+		<p class="flex flex-row gap-2">
+			<Shimmer>👍 100</Shimmer>
+			<Shimmer>💭 100</Shimmer>
+		</p>
+	</div>
 {/if}

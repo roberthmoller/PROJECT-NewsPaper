@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Shimmer } from '$lib/components';
 	import type { Item, External } from '$lib/types';
 	type Props = External<Pick<Item, 'url' | 'id'>> & any;
 	export const { url, id, isLoading, ...others }: Props = $props();
@@ -19,5 +20,10 @@
 		</p>
 	</div>
 {:else}
-	<p {...others}>Loading...</p>
+	<div {...others}>
+		<p class="flex flex-row gap-2">
+			<Shimmer>READ MORE</Shimmer>
+			<Shimmer>(links for hn posts are hidden but external links are shown)</Shimmer>
+		</p>
+	</div>
 {/if}

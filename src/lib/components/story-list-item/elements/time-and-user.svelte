@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Shimmer } from '$lib/components';
 	import type { External, Item } from '$lib/types';
 	import Time from 'svelte-time';
 
@@ -14,5 +15,10 @@
 		</p>
 	</div>
 {:else if isLoading}
-	<p {...others}>Loading...</p>
+	<div {...others}>
+		<p class="flex flex-row gap-2">
+			<Shimmer>x days ago</Shimmer>
+			<Shimmer>by usernme</Shimmer>
+		</p>
+	</div>
 {/if}
