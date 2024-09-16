@@ -1,31 +1,48 @@
-# create-svelte
+# Hacker News Client
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+A client for the Hacker News API.
 
-## Creating a project
+## Getting Started <a id="getting-started"/>
 
-If you're seeing this, you've probably already done this step. Congrats!
+Instructions for setting up the project locally.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/roberthmoller/PROJECT-NewsPaper.git
+   cd PROJECT-NewsPaper
+   ```
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Developing
+3. Create a `.env` file in the root directory and add your GROQ API key:
+   ```
+   GROQ_API_KEY=your_api_key_here
+   ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+> Note: Make sure not to commit your `.env` file to version control. It's already included in `.gitignore`.
+
+## Developing <a id="developing"/>
+
+Once you've created a project and installed dependencies with `npm install`, start a development server:
 
 ```bash
 npm run dev
+```
+or start the server and open the app in a new browser tab
 
-# or start the server and open the app in a new browser tab
+```bash
 npm run dev -- --open
 ```
 
-## Building
+## Building <a id="building"/>
 
 To create a production version of your app:
 
@@ -35,4 +52,4 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
