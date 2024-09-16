@@ -10,7 +10,6 @@ export const load = async ({ fetch, url, params }) => {
 	const newsApi = new HackerNewsApi(fetch);
 	const { page, limit, category } = parseStoriesParams({ url, params });
 
-	console.log('category', category, 'page', page + 1);
 	switch (category) {
 		case 'top':
 			return { stories: await newsApi.topStories({ page, limit }), category };
@@ -40,12 +39,10 @@ function parseStoriesParams(request: { url: URL, params: RouteParams }) {
 export const actions = {
 	next({ url, params }) {
 		const { page, limit, category } = parseStoriesParams({ url, params });
-		console.log('got', page + 1 , url.searchParams);
 		const pageParam = page + 2 == 0 ? undefined : `page=${page + 2}`;
 		const limitParam = limit == DEFAULT_LIMIT ? undefined : `limit=${limit}`;
 		const queryParams = [pageParam, limitParam].filter(param => param != undefined).join('&');
-		console.log('going to ', `/stories/${category}?${queryParams}`);
-		redirect(303,`/stories/${category}?${queryParams}`);
+		redirect(303,`/${category}?${queryParams}`);
 	},
 	previous({ url, params }) {
 		const { page, limit, category } = parseStoriesParams({ url, params });
@@ -55,6 +52,6 @@ export const actions = {
 		const pageParam = page == 0 ? undefined : `page=${page}`;
 		const limitParam = limit == DEFAULT_LIMIT ? undefined : `limit=${limit}`;
 		const queryParams = [pageParam, limitParam].filter(param => param != undefined).join('&');
-		redirect(303,`/stories/${category}?${queryParams}`);
+		redirect(303,`/${category}?${queryParams}`);
 	}
 };
