@@ -6,7 +6,7 @@
 </script>
 
 <article class="flex flex-col">
-	<div class="grid grid-cols-12 gap-4">
+	<div class="sm:grid sm:grid-cols-12 flex flex-col-reverse gap-4">
         <div class="col-span-8 flex flex-col flex-grow ">
             <Title {...story} class="mt-2 mb-1" />
             <TimeAndUser {...story} />
