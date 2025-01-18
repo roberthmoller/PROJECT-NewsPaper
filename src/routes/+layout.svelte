@@ -17,13 +17,13 @@
 	</h1>
 	<nav class="max-w-2xl mx-auto">
 		<ul class="grid grid-cols-7 mx-auto text-center py-2 font-arial uppercase text-xs font-semibold">
-			<li><a href="/new?page=1" class="hover:underline">New</a></li>
-			<li><a href="/top?page=1" class="hover:underline">Top</a></li>
-			<li><a href="/best?page=1" class="hover:underline">Best</a></li>
+			<li><a href="/new?page=1" target="_self" class="hover:underline">New</a></li>
+			<li><a href="/top?page=1" target="_self" class="hover:underline">Top</a></li>
+			<li><a href="/best?page=1" target="_self" class="hover:underline">Best</a></li>
 			<span class="text-black/30">|</span>
-			<li><a href="/ask?page=1" class="hover:underline">Ask</a></li>
-			<li><a href="/show?page=1" class="hover:underline">Show</a></li>
-			<li><a href="/jobs?page=1" class="hover:underline">Jobs</a></li>
+			<li><a href="/ask?page=1" target="_self" class="hover:underline">Ask</a></li>
+			<li><a href="/show?page=1" target="_self" class="hover:underline">Show</a></li>
+			<li><a href="/jobs?page=1" target="_self" class="hover:underline">Jobs</a></li>
 		</ul>
 	</nav>
 
