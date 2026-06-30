@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { Shimmer } from '$lib/components';
+	import { DESCRIPTION_OVERVIEW_MAX_LENGTH } from '$lib/constants';
 	import type { External, Metadata } from '$lib/types';
 	type Props = External<Pick<Metadata, 'description'>> & { isTruncated?: boolean } & any;
 	export const { description, isLoading, isTruncated, ...others }: Props = $props();
+
+	const displayDescription = $derived(
+		isTruncated && description && description.length > DESCRIPTION_OVERVIEW_MAX_LENGTH
+			? `${description.slice(0, DESCRIPTION_OVERVIEW_MAX_LENGTH)}...`
+			: description
+	);
 </script>
 
 {#if description}
 	<div {...others}>
-		<p class="font-serif overflow-ellipsis">
-			{#if isTruncated}
-				{description?.slice(0, 200)}
-				{#if description && description?.length > 200}...{/if}
-			{:else}
-				{description}
-			{/if}
+		<p class="font-georgia text-base text-muted leading-relaxed">
+			{displayDescription}
 		</p>
 	</div>
 {:else if isLoading}

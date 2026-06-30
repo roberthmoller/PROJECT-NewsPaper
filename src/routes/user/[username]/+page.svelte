@@ -6,13 +6,13 @@
 </script>
 
 <article class="mx-4 py-4">
-	<h1 class="text-lg font-bold font-serif">{user.id}</h1>
+	<h1 class="text-lg font-bold font-georgia">{user.id}</h1>
 	<div>
-		<p class="text-sm text-gray-500">
+		<p class="text-sm text-muted">
 			Member since <Time timestamp={new Date(user.created * 1000)} relative />
 		</p>
-		<p class="text-sm text-gray-500">{user.karma} karma</p>
-		<p class="text-sm text-gray-500">{user.submitted.length} stories</p>
+		<p class="text-sm text-muted">{user.karma} karma</p>
+		<p class="text-sm text-muted">{user.submitted.length} stories</p>
 	</div>
-	<p class="mt-2 text-md">{@html user.about}</p>
+	<p class="mt-2 text-md font-georgia leading-relaxed">{@html user.about}</p>
 </article>

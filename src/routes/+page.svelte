@@ -14,7 +14,7 @@
 		<h2 class="italic text-2xl font-playfair font-semibold py-2">New Stories</h2>
 		<hr>
 		<small>
-			<ul class="list-disc font-serif px-6 py-4 gap-2 flex flex-col">
+			<ul class="list-disc font-georgia px-6 py-4 gap-2 flex flex-col">
 				{#each newStories as storyId}
 					<li>
 						<StoryListItem {storyId} style="bullet"/>

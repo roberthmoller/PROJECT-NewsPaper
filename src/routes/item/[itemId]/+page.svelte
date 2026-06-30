@@ -28,35 +28,35 @@
 	<StoryListElements.Title {...story} class="mb-1" />
 	<StoryListElements.TimeAndUser {...story} class="mb-3" />
 	{#if story.text}
-		<p class="mb-3 prose">{@html story.text}</p>
+		<p class="mb-3 prose dark:prose-invert leading-relaxed font-georgia">{@html story.text}</p>
 	{/if}
 	{#if story.url}
 		<StoryListElements.ReadMore {...story} class="mb-3" />
 
-		<section class="mb-3 bg-black/5 p-4 rounded-md flex flex-col gap-4">
+		<section class="mb-3 bg-panel p-4 rounded-md flex flex-col gap-4">
 			<details>
-				<summary class="text-xs text-black/50 cursor-pointer hover:underline" onclick={loadSummary}
+				<summary class="text-xs text-muted cursor-pointer hover:underline" onclick={loadSummary}
 					>View article summary</summary
 				>
-				<blockquote class="mt-2 bg-black/5 p-4 rounded-md">
+				<blockquote class="mt-2 bg-panel p-4 rounded-md">
 					{#if tldr.isLoading}
 						<p>Generating summary...</p>
 						<Shimmer class="my-2">
 							<p>Generating text to summarise the article...</p>
 						</Shimmer>
 					{:else if tldr.summary}
-					<div class="prose">
+					<div class="prose dark:prose-invert leading-relaxed font-georgia">
 						{@html htmlToMarkdown.makeHtml(tldr.summary)}
 					</div>
 					{/if}
 				</blockquote>
 			</details>
 			<sub class="text-xs mt-auto whitespace-nowrap overflow-hidden text-ellipsis block font-bold">
-				<span class="text-black/50">TL;DR from </span>
+				<span class="text-muted">TL;DR from </span>
 				<a
 					href="https://console.groq.com/"
 					target="_blank"
-					class="text-black hover:underline"
+					class="text-foreground hover:underline"
 					title="TL;DR">Groq</a
 				>
 			</sub>
@@ -64,10 +64,10 @@
 	{/if}
 
 	{#if metadata.description}
-		<section class="mb-3 bg-black/5 p-4 rounded-md grid grid-cols-12 gap-4">
+		<section class="mb-3 bg-panel p-4 rounded-md grid grid-cols-12 gap-4">
 			<div class="{metadata.image ? 'col-span-8' : 'col-span-12'} flex flex-col gap-1">
 				{#if metadata.title}
-					<p class="text-sm text-black/50">
+					<p class="text-sm text-muted">
 						<a href={story.url} target="_blank" class="hover:underline" title={story.url}
 							>{metadata.title}</a
 						>
@@ -75,17 +75,17 @@
 				{/if}
 				<StoryListElements.Description {...metadata} />
 				<details class="mt-2">
-					<summary class="text-xs text-black/50 cursor-pointer hover:underline"
+					<summary class="text-xs text-muted cursor-pointer hover:underline"
 						>View raw metadata</summary
 					>
-					<pre class="mt-1 text-xs !bg-black/5 rounded-md overflow-x-auto"><code
+					<pre class="mt-1 text-xs !bg-panel rounded-md overflow-x-auto"><code
 							class="language-javascript !text-xs">{JSON.stringify(metadata, null, 2)}</code
 						></pre>
 				</details>
 				<sub
 					class="text-xs mt-auto whitespace-nowrap overflow-hidden text-ellipsis block font-bold"
 				>
-					<span class="text-black/50">OpenGraph data from</span>
+					<span class="text-muted">OpenGraph data from</span>
 					<a href={story.url} target="_blank" class="hover:underline" title={story.url}
 						>{story.url}</a
 					>
@@ -99,7 +99,7 @@
 </article>
 
 <section class="mx-4">
-	<h1 class="text-lg font-bold font-serif">Comments</h1>
+	<h1 class="text-lg font-bold font-georgia">Comments</h1>
 	<div class="flex flex-col gap-4">
 		<CommentsList kids={story.kids} />
 	</div>

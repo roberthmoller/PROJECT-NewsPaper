@@ -2,9 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-gutter: #f4f4f4;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-text-muted: rgba(0, 0, 0, 0.5);
+  --color-text-subtle: rgba(0, 0, 0, 0.3);
+  --color-border: rgba(0, 0, 0, 0.3);
+  --color-panel: rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --color-gutter: #161616;
+  --color-surface: #222222;
+  --color-text: #eaeaea;
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-subtle: rgba(255, 255, 255, 0.3);
+  --color-border: rgba(255, 255, 255, 0.25);
+  --color-panel: rgba(255, 255, 255, 0.05);
+}
 
 .font-playfair {
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
   font-optical-sizing: auto;
 }
 
@@ -17,9 +36,10 @@
 }
 
 .font-times {
-  font-family: "Times New Roman", serif;
+  font-family: 'Times New Roman', serif;
 }
 
 body {
-  background-color: #f4f4f4;
+  background-color: var(--color-gutter);
+  color: var(--color-text);
 }

@@ -9,7 +9,7 @@
 {#if title}
 	<div {...others}>
 		<a href={url ?? `/item/${id}`} target="_blank" class="hover:underline">
-			<h3 class="text-xl font-serif font-bold">{@html title}</h3>
+			<h3 class="text-xl font-georgia font-bold leading-relaxed">{@html title}</h3>
 		</a>
 	</div>
 {:else if isLoading}
