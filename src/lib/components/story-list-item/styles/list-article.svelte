@@ -10,7 +10,7 @@
         <div class="col-span-8 flex flex-col flex-grow ">
             <Title {...story} class="mt-2 mb-1" />
             <TimeAndUser {...story} />
-            <Description {...metadata} class="mt-3"/>
+            <Description {...metadata} isTruncated class="mt-3"/>
         </div>
     
         <Image class="col-span-4 max-h-[20em] w-full h-full object-cover" {...metadata} />

@@ -12,7 +12,7 @@
 				<a href={url} target="_blank" title={url} class="hover:underline flex-grow flex flex-col justify-end">
 					<span class="flex flex-row gap-1">
 						READ MORE
-						<span class="text-black/50 flex-shrink">
+						<span class="text-muted flex-shrink">
 							(<span class="whitespace-nowrap text-ellipsis">{new URL(url).host}</span>)
 						</span>
 					</span>

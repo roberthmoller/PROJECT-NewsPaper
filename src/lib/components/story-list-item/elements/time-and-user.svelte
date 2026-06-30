@@ -9,7 +9,7 @@
 
 {#if time && by}
 	<div {...others}>
-		<p class="italic">
+		<p class="italic font-georgia leading-relaxed">
 			<Time timestamp={new Date(time * 1000)} relative />
 			by <a href="/user/{by}" class="hover:underline">{by}</a>
 		</p>

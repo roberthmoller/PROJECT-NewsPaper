@@ -7,7 +7,7 @@
 <div {...others}>
 	<div class="relative overflow-hidden rounded {shrink ? 'w-fit h-fit' : 'w-full h-full'}">
 		<div
-			class="absolute inset-0 animate-shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%]"
+			class="absolute inset-0 animate-shimmer bg-gradient-to-r from-panel via-surface to-panel dark:from-panel dark:via-gutter dark:to-panel bg-[length:200%_100%]"
 		></div>
 		<div class="invisible">
 			{@render children()}

@@ -12,7 +12,7 @@
 </script>
 
 <header class="flex flex-row justify-between items-end mx-4 py-4 w-full">
-	<h2 class="flex-grow text-2xl font-serif italic">
+	<h2 class="flex-grow text-2xl font-georgia italic">
 		{category.slice(0, 1).toUpperCase() + category.slice(1).toLowerCase()} Stories
 	</h2>
 	<nav class="">
